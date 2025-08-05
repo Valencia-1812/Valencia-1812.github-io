@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculadora de Oro</title>
+  <style>
+    body {
+      background: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .container {
+      background: #000;
+      color: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      width: 300px;
+    }
+    .container h2 {
+      text-align: center;
+      background: #111;
+      padding: 10px;
+      border-radius: 8px;
+    }
+    label, input, button {
+      display: block;
+      width: 100%;
+      margin-top: 15px;
+    }
+    input {
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background: #222;
+      color: #fff;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px;
+      background: #444;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #666;
+    }
+    .result {
+      margin-top: 15px;
+      background: #111;
+      padding: 10px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>ORO PRICE</h2>
+
+    <label for="gramos">Gramos:</label>
+    <input type="number" id="gramos" step="any">
+
+    <label for="ley">Ley:</label>
+    <input type="number" id="ley" step="any">
+
+    <button onclick="calcularGramoFino()">GENERAR</button>
+
+    <div class="result" id="resultadoFino">Gramo Fino: --</div>
+
+    <label for="valorGramo">Valor del Gramo Fino:</label>
+    <input type="number" id="valorGramo" step="any">
+
+    <button onclick="calcularPrecioFinal()">GENERAR</button>
+
+    <div class="result" id="precioFinal">Precio Final: --</div>
+  </div>
+
+  <script>
+    let gramosFinos = 0;
+
+    function calcularGramoFino() {
+      const gramos = parseFloat(document.getElementById("gramos").value);
+      const ley = parseFloat(document.getElementById("ley").value);
+
+      if (!isNaN(gramos) && !isNaN(ley)) {
+        gramosFinos = gramos * ley;
+        document.getElementById("resultadoFino").innerText = "Gramo Fino: " + gramosFinos.toFixed(3);
+      } else {
+        document.getElementById("resultadoFino").innerText = "Gramo Fino: --";
+      }
+    }
+
+    function calcularPrecioFinal() {
+      const valorGramo = parseFloat(document.getElementById("valorGramo").value);
+
+      if (!isNaN(valorGramo) && gramosFinos > 0) {
+        const precio = gramosFinos * valorGramo;
+        document.getElementById("precioFinal").innerText = "Precio Final: $" + precio.toFixed(2);
+      } else {
+        document.getElementById("precioFinal").innerText = "Precio Final: --";
+      }
+    }
+  </script>
+</body>
+</html>
